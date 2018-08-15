@@ -1,16 +1,18 @@
 html
 	head
 		link(rel='stylesheet', href='/stylesheets/20180805/dragDrop.css')
-		link(link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css"
+		link(rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css"
 		integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous")
 		link(href='https://fonts.googleapis.com/icon?family=Material+Icons',
 		rel='stylesheet')
 		script(src="https://code.jquery.com/jquery-3.3.1.js",
 		integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=",
 		crossorigin="anonymous")
+		script(src='https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.10/lodash.min.js')
+		script(src="https://www.gstatic.com/firebasejs/5.3.1/firebase.js")
 
 	body
-		.side-bar-cover(type='true')
+		.side-bar-cover(type='false')
 			.full-screen-blocker
 			.left-side-bar
 				.profile-field.flex.align-center
@@ -125,7 +127,7 @@ html
 					i.fas.fa-search
 				input(placeholder='SEARCH')
 			.flex-1
-			.nav-profile-field.flex.align-center(type='login')
+			.nav-profile-field.flex.align-center(type='logout')
 				.login-logout-cover.flex.align-center
 					i.fas.fa-power-off
 				.nick-mail-cover
@@ -257,52 +259,10 @@ html
 
 			.condition-bar-field(type='false')
 				.travellers-part
-					.travellers-cell.flex.align-center
-						.photo-div
-							.travellers-photo
-						.travellers-name-div.flex-1 Jeremy Shaw
-						.radio-box.flex.align-center
-							.circle
-					.travellers-cell.flex.align-center
-						.photo-div
-							.travellers-photo.kimberly
-						.travellers-name-div.flex-1 Kimberly Wales
-						.radio-box.flex.align-center
-							.circle
-					.travellers-cell.flex.align-center
-						.photo-div
-							.travellers-photo.chi
-						.travellers-name-div.flex-1 Chi Chow
-						.radio-box.flex.align-center
-							.circle
-					.travellers-cell.flex.align-center
-						.photo-div
-							.travellers-photo.karan
-						.travellers-name-div.flex-1 Karan Sharma
-						.radio-box.flex.align-center
-							.circle
-					.travellers-cell.flex.align-center
-						.photo-div
-							.travellers-photo.keeri
-						.travellers-name-div.flex-1 Keeri Pervose
-						.radio-box.flex.align-center
-							.circle
-					.travellers-cell.flex.align-center
-						.photo-div
-							.travellers-photo.katy
-						.travellers-name-div.flex-1 Katy Gomes
-						.radio-box.flex.align-center
-							.circle
-					.travellers-cell.flex.align-center
-						.photo-div
-							.travellers-photo.jeff
-						.travellers-name-div.flex-1 Jeff Walton
-						.radio-box.flex.align-center
-							.circle
-					.travellers-cell.flex.align-center
-						.photo-div
-							.travellers-photo.peter
-						.travellers-name-div.flex-1 Peter John
-						.radio-box.flex.align-center
-							.circle
+
+
+
+
+	script(src='/javascripts/20180805/firebase.selector.js')
+	script(src="/javascripts/20180805/controller.example.js")
 	script(src='/javascripts/20180805/dragDrop.js')

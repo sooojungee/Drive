@@ -16,6 +16,7 @@ $input.on('click', function (e) {
     $logo.attr('type', '');
     $this.attr('type', '');
   });
+  
 });
 
 
@@ -75,40 +76,22 @@ $('.full-screen-blocker').on('click', function () {
 
 // side bar end
 
-
-const $travellers = $('.travellers-cell');
-
-$travellers.on('click', function () {
-  const $this = $(this);
-  $this.find('.radio-box').addClass('.animation-bounce-in');
-  const $part = $('.travellers-part');
-  if ($this.attr('check') !== 'on') {
-    $this.attr('check', 'on');
-  } else {
-    $this.attr('check', '');
-  }
-
-  if($this.attr('check') === 'on') {
-    $part.find($travellers).attr('check', '');
-    $this.attr('check', 'on');
-  }
-
-});
-
-
-// let sidebar = document.getElementById('.left-side-bar');
-
-// window.onclick = function (event) {
-//   if(event.target === sidebar) {
-//     // sidebar.style.display = "none";
-//     console.log('sdfsefses')
-//     sidebar.attr('type', 'false');
-//   }
-// }
 //
-// document.on('click', function (event) {
-//   if(event.target === sidebar) {
-//     console.log('sdfsdf')
+// const $travellers = $('.travellers-cell');
+//
+// $travellers.on('click', function () {
+//   const $this = $(this);
+//   $this.find('.radio-box').addClass('.animation-bounce-in');
+//   const $part = $('.travellers-part');
+//   if ($this.attr('check') !== 'on') {
+//     $this.attr('check', 'on');
+//   } else {
+//     $this.attr('check', '');
 //   }
 //
-// })
+//   if($this.attr('check') === 'on') {
+//     $part.find($travellers).attr('check', '');
+//     $this.attr('check', 'on');
+//   }
+//
+// });
