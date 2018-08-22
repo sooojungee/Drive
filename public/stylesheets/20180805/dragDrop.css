@@ -5,9 +5,34 @@
 body {
   margin: 0;
   padding: 0;
-  background: #D9352A;
+  background: white;
   position: relative;
   font-family: Hind Madurai, sans-serif; }
+
+.crown {
+  width: 4px;
+  height: 4px;
+  color: #d73731;
+  position: absolute;
+  left: 9px;
+  top: -8px;
+  transform: scale(0.8); }
+
+.loading-part {
+  flex: 1;
+  max-height: 100%;
+  height: fit-content;
+  padding: 32px 32px;
+  flex-flow: wrap;
+  overflow: auto;
+  width: 100%;
+  position: relative; }
+
+.display-none {
+  display: none !important; }
+
+#fileUploader {
+  display: none; }
 
 .side-bar-cover {
   position: fixed;
@@ -121,8 +146,7 @@ body {
             font-size: 12px;
             line-height: 20px;
             color: #fff;
-            overflow: hidden;
-            border-right: 1px solid white; }
+            overflow: hidden; }
             .side-bar-cover .left-side-bar .scroll-cover .storage-grid .storage-part .cell:first-child {
               border-bottom-left-radius: 5px;
               border-top-left-radius: 5px; }
@@ -569,7 +593,8 @@ body {
         animation: .3s ease-in-out both bounce; }
   .travellers-cell .photo-div {
     width: 35px;
-    height: 35px; }
+    height: 35px;
+    position: relative; }
     .travellers-cell .photo-div .travellers-photo {
       height: 100%;
       border-radius: 50%;

@@ -88,10 +88,10 @@ const FirebaseDB = {
     
   },
   
-  readFile: async (checkId, id) => {
+  readFile: async (checkId, sign, id) => {
     
     const files = [];
-    await store.collection("files").where(checkId, "==", id)
+    await store.collection("files").where(checkId, sign, id)
       .get()
       .then(function (querySnapshot) {
         querySnapshot.forEach(function (doc) {
@@ -101,6 +101,19 @@ const FirebaseDB = {
       .catch(function (error) {
         console.log("Error getting documents: ", error);
       });
+    
+    return files;
+  },
+  
+  searchFile: async (id, key, val) => {
+    const files = [];
+    await store.collection("files").where('uid', '==', id).get().then(function (querySnapshot) {
+      querySnapshot.forEach(function (doc) {
+        /// nn
+        if (doc.data().name.toLowerCase().indexOf(val) >= 0)
+          files.push(doc.data());
+      });
+    });
     
     return files;
   },
@@ -124,27 +137,24 @@ const FirebaseDB = {
 const FirebaseApi = new function () {
   
   let listener = null;
-  let progressListener = null;
-  let readListener = null;
   let updateCardListener = null;
+  let uploadListener = null;
   
   function setOnUpdateCardListener(callback) {
     updateCardListener = callback;
   }
   
-  function setOnReadListener(callback) {
-    readListener = callback;
+  function setOnUploadListener(callback) {
+    uploadListener = callback;
   }
   
-  function setOnProgressListener(callback) {
-    progressListener = callback;
-  }
   
   function setOnAuthStateChanged(callback) {
     listener = callback;
   }
   
   auth.onAuthStateChanged(async (user) => {
+    uploadListener();
     
     if (_.isNil(user)) {
       if (!_.isNil(listener)) listener(null);
@@ -172,9 +182,6 @@ const FirebaseApi = new function () {
       
       const ref = storageRef.child(files[i].name).put(files[i]);
       
-      // const ref = storageRef.child(files[i].name).put(files[i], metadata);
-      
-      
       await ref.on('state_changed', function (snapshot) {
         var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
         console.log('Upload is ' + progress + '% done');
@@ -183,15 +190,13 @@ const FirebaseApi = new function () {
       }, await function () {
         ref.snapshot.ref.getDownloadURL().then(function (downloadURL) {
           console.log('File available at', downloadURL);
-          progressListener(files.length - i);
         });
         
       });
       
       await FirebaseDB.uploadFile(user.uid, files[i]);
-      updateCardListener(files[i]);
+      updateCardListener(user.uid, files[i]);
     }
-    
     
   }
   
@@ -208,9 +213,9 @@ const FirebaseApi = new function () {
   
   async function readFileData(id) {
     
-    const files = await FirebaseDB.readFile(id);
+    const files = await FirebaseDB.readFile('uid', '==', id);
     console.log(files);
-    readListener(files);
+    // readListener(files);
     return files;
     
     
@@ -229,10 +234,9 @@ const FirebaseApi = new function () {
     },
     signOut: async () => await auth.signOut(),
     setOnAuthStateChanged,
-    setOnProgressListener,
     uploadFileData,
     readFileData,
-    setOnReadListener,
+    setOnUploadListener,
     setOnUpdateCardListener,
     deleteFileData
   };

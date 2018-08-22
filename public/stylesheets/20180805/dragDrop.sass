@@ -4,14 +4,42 @@
 *
   box-sizing: border-box
 
+
 body
   margin: 0
   padding: 0
-  background: #D9352A
+  background: white
   position: relative
   font-family: Hind Madurai, sans-serif
 
 $zone-padding: 30px
+
+
+.crown
+  width: 4px
+  height: 4px
+  color: #d73731
+  position: absolute
+  left: 9px
+  top: -8px
+  transform: scale(0.8)
+
+.loading-part
+  flex: 1
+  max-height: 100%
+  height: fit-content
+  padding: 32px 32px
+  flex-flow: wrap
+  overflow: auto
+  width: 100%
+  position: relative
+
+
+.display-none
+  display: none !important
+
+#fileUploader
+  display: none
 
 .side-bar-cover
   position: fixed
@@ -129,7 +157,7 @@ $zone-padding: 30px
             line-height: 20px
             color: #fff
             overflow: hidden
-            border-right: 1px solid white
+            //border-right: 1px solid white
             &:first-child
               border-bottom-left-radius: 5px
               border-top-left-radius: 5px
@@ -695,6 +723,7 @@ $loading-height: 80px
   .photo-div
     width: 35px
     height: 35px
+    position: relative
     .travellers-photo
       height: 100%
       border-radius: 50%

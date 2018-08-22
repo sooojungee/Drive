@@ -1,6 +1,8 @@
 html
 	head
 		link(rel='stylesheet', href='/stylesheets/20180805/dragDrop.css')
+		link(rel='stylesheet', href='/stylesheets/20180805/loading.css')
+		link(href='https://fonts.googleapis.com/css?family=Actor' rel='stylesheet' type='text/css')
 		link(rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css"
 		integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous")
 		link(href='https://fonts.googleapis.com/icon?family=Material+Icons',
@@ -12,45 +14,52 @@ html
 		script(src="https://www.gstatic.com/firebasejs/5.3.1/firebase.js")
 
 	body
+		input#fileUploader(type="file" multiple='multiple')
 		.side-bar-cover(type='false')
 			.full-screen-blocker
 			.left-side-bar
 				.profile-field.flex.align-center
 					.profile-photo
 					.name-email-cover.flex-1
-						.nick-name Juwon Hong
-						.email juwonhp373@gmail.com
+						.nick-name NoBody
+						.email -
 				.scroll-cover
 					.menu-theme.flex.flex-1 저장공간 관리
 					.storage-grid
-						.used-storage-part.flex-1 5.5GB / 10GB
+						.used-storage-part.flex-1 0GB / 0GB
 						.storage-part.flex
-							.cell.type-image(style='width:5%')
-							.cell.type-code(style='width:20%')
-							.cell.type-text(style='width:2%')
-							.cell.type-sound(style='width:8%')
-							.cell.type-video(style='width:10%')
-							.cell.type-etc(style='width:16%')
+							.cell.type-image#storage-image(style='width:0.1%')
+							.cell.type-code#storage-code(style='width:0%')
+							.cell.type-text#storage-text(style='width:0%')
+							.cell.type-sound#storage-sound(style='width:0%')
+							.cell.type-video#storage-video(style='width:0%')
+							.cell.type-etc#storage-etc(style='width:0%')
 
 						.storage-description-part
 							.category
 								.box.type-image
-								.text IMAGE <i>5%</i>
+								.text IMAGE
+									i#category-image 0%
 							.category
 								.box.type-code
-								.text APPLICATION <i>2%</i>
+								.text APPLICATION
+									i#category-code 0%
 							.category
 								.box.type-text
-								.text TEXT <i>20%</i>
+								.text TEXT
+									i#category-text 0%
 							.category
 								.box.type-sound
-								.text AUDIO <i>10%</i>
+								.text AUDIO
+									i#category-sound 0%
 							.category
 								.box.type-video
-								.text VIDEO <i>8%</i>
+								.text VIDEO
+									i#category-video 0%
 							.category
 								.box.type-etc
-								.text ETC <i>16%</i>
+								.text ETC
+									i#category-etc 0%
 					.line
 					.menu-theme.flex.flex-1 카테고리
 						.reset-button.flex.align-center
@@ -59,61 +68,61 @@ html
 						.category-card-outer(type='deselected')
 							.category-card.type-image
 								.category-card-cover
-								.text-group
+								.text-group(type='image')
 									.name IMAGE
 									.desc-group
-										.count 300
-										.capacity / 38.35GB
+										.count 0
+										.capacity / 0GB
 								.icon-group
 									.i.fas.fa-image.type-image-color
 						.category-card-outer(type='deselected')
 							.category-card.type-code
 								.category-card-cover
-								.text-group
+								.text-group(type='application')
 									.name APPLICATION
 									.desc-group
-										.count 300
-										.capacity / 38.35GB
+										.count 0
+										.capacity / 0GB
 								.icon-group
 									.i.fas.fa-code.type-code-color
-						.category-card-outer
+						.category-card-outer(type='deselected')
 							.category-card.type-text
 								.category-card-cover
-								.text-group
+								.text-group(type='text')
 									.name TEXT
 									.desc-group
-										.count 300
-										.capacity / 38.35GB
+										.count 0
+										.capacity / 0GB
 								.icon-group
 									.i.fas.fa-font.type-text-color
 						.category-card-outer(type='deselected')
 							.category-card.type-sound
 								.category-card-cover
-								.text-group
+								.text-group(type='audio')
 									.name AUDIO
 									.desc-group
-										.count 300
-										.capacity / 38.35GB
+										.count 0
+										.capacity / 0GB
 								.icon-group
 									.i.fas.fa-music.type-sound-color
 						.category-card-outer(type='deselected')
 							.category-card.type-video
 								.category-card-cover
-								.text-group
+								.text-group(type='video')
 									.name VIDEO
 									.desc-group
-										.count 300
-										.capacity / 38.35GB
+										.count 0
+										.capacity / 0GB
 								.icon-group
 									.i.fas.fa-video.type-video-color
 						.category-card-outer(type='deselected')
 							.category-card.type-etc
 								.category-card-cover
-								.text-group
+								.text-group(type='etc')
 									.name ETC
 									.desc-group
-										.count 300
-										.capacity / 38.35GB
+										.count 0
+										.capacity / 0GB
 								.icon-group
 									.i.fas.fa-file.type-etc-color
 
@@ -125,7 +134,7 @@ html
 			.input-field.flex.align-center(type='nav')
 				.icon-grid.flex.align-center
 					i.fas.fa-search
-				input(placeholder='SEARCH')
+				input#search(placeholder='SEARCH')
 			.flex-1
 			.nav-profile-field.flex.align-center(type='logout')
 				.login-logout-cover.flex.align-center
@@ -166,96 +175,29 @@ html
 			.changing-field.flex.height-align-center(type='false')
 				.title-grid Friends
 
-		.browse-button.flex.align-center
+		.browse-button.flex.align-center.upload-button
 			i.fas.fa-plus
 		.upload-condition-zone.flex
-			//.upload-field.flex.flex-1.align-center
+			.upload-field.flex.flex-1.align-center
 				.description-button-grid.flex.align-center
 					svg
 						rect
 					i.material-icons devices_other
 					.description Drop Files Here
-					.button.flex.align-center Browse
+					.button.flex.align-center.upload-button Browse
 
 			//square
-			.card-part.flex(type='square')
-				.card-cover-cell
-					.sights-card-cell
-						.sights-photo-div.flex.align-center.type-sound-color
-							.hover-dark-background
-							.i.fas.fa-music
-						.sights-content-div.flex.align-center
-							.content.flex-1
-								.text.bold FILE NAME HERE
-								.text.desc SOUND / 30KB
-							.download-icon
-								i.fas.fa-download
-						.i.fas.fa-trash-alt
-
-				.card-cover-cell
-					.sights-card-cell
-						.sights-photo-div.flex.align-center.type-image-color
-							.hover-dark-background
-							.i.fas.fa-image
-						.sights-content-div.flex.align-center
-							.content.flex-1
-								.text.bold FILE NAME HERE
-								.text.desc SOUND / 30KB
-							.download-icon
-								i.fas.fa-download
-						.i.fas.fa-trash-alt
-
-				.card-cover-cell
-					.sights-card-cell
-						.sights-photo-div.flex.align-center.type-etc-color
-							.hover-dark-background
-							.i.fas.fa-file
-						.sights-content-div.flex.align-center
-							.content.flex-1
-								.text.bold FILE NAME HERE
-								.text.desc SOUND / 30KB
-							.download-icon
-								i.fas.fa-download
-						.i.fas.fa-trash-alt
-
-				.card-cover-cell
-					.sights-card-cell
-						.sights-photo-div.flex.align-center.type-video-color
-							.hover-dark-background
-							.i.fas.fa-video
-						.sights-content-div.flex.align-center
-							.content.flex-1
-								.text.bold FILE NAME HERE
-								.text.desc SOUND / 30KB
-							.download-icon
-								i.fas.fa-download
-						.i.fas.fa-trash-alt
-
-				.card-cover-cell
-					.sights-card-cell
-						.sights-photo-div.flex.align-center.type-code-color
-							.hover-dark-background
-							.i.fas.fa-code
-						.sights-content-div.flex.align-center
-							.content.flex-1
-								.text.bold FILE NAME HERE
-								.text.desc SOUND / 30KB
-							.download-icon
-								i.fas.fa-download
-						.i.fas.fa-trash-alt
-
-				.card-cover-cell
-					.sights-card-cell
-						.sights-photo-div.flex.align-center.type-text-color
-							.hover-dark-background
-							.i.fas.fa-font
-						.sights-content-div.flex.align-center
-							.content.flex-1
-								.text.bold FILE NAME HERE
-								.text.desc SOUND / 30KB
-							.download-icon
-								i.fas.fa-download
-						.i.fas.fa-trash-alt
+			.card-part.flex.display-none(type='square')
+			.loading-part.display-none
+				.loader
+					h1 LOADING
+						|
+					.empty
+							span
+							|
+							span
+							|
+							span
 
 			.condition-bar-field(type='false')
 				.travellers-part
